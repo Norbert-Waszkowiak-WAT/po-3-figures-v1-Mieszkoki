@@ -19,6 +19,7 @@ double getY();
 void flip();
 void move(double x, double y);
 string toString();
+double distanceTo(const Point &other);
 
 };
 
