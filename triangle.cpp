@@ -25,12 +25,21 @@ void Triangle :: move(double x, double y){
    b.move(x,y);
    c.move(x,y);
    }
+   double Triangle::getLength(Point &a, Point &b)
+{
+    double odca = a.getX() - b.getX();
+    double odcb = a.getY() - b.getY();
 
-double Triangle:: getSurface(){
-   double side1 = sqrt(pow(a.getX()-b.getX(),2) + pow(a.getY()- b.getY(),2));
-   double side2 = sqrt(pow(a.getX()-c.getX(),2) + pow(a.getY()- c.getY(),2));
-   double side3 = sqrt(pow(b.getX()-c.getX(),2) + pow(b.getY()- c.getY(),2));
-   return sqrt((side1 + side2 +side3)*(side1+ side2 - side3)*(side1-side2+side3)*(-side1+side2+side3))*0.25;
+    return sqrt(odca*odca+odcb*odcb);
+}
+
+double Triangle::getSurface()
+{
+    double odca = getLength(a, b);
+    double odcb = getLength(b, c);
+    double odcc = getLength(a, c);
+    double p = 0.5 * (odca+odcb+odcc);
+    return sqrt(p*(p-odca)*(p-odcb)*(p-odcc));
 }
 
 string Triangle:: toString(){

@@ -18,6 +18,7 @@ bool equals (const Triangle &other);
 void flip();
 void move (double x, double y);
 double getSurface();
+double getLength(Point &a, Point &b);
 string toString();
 
 }; 

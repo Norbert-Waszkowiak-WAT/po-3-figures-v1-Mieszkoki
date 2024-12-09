@@ -27,15 +27,28 @@ void Quadrilateral :: move(double x, double y){
    c.move(x,y);
    d.move(x,y);
    }
-double Quadrilateral :: getSurface(){
-    double ab = a.distanceTo(b);
-    double bc = b.distanceTo(c);
-    double cd = c.distanceTo(d);
-    double da = d.distanceTo(a);
-    double s = (ab + bc + cd + da) / 2.0;
-    double area = sqrt((s-ab)*(s-bc)*(s-cd)*(s-da));
-    return area;
+
+double Quadrilateral::getSurface()
+{
+    double output = 0;
+
+    double all_x[] = { a.getX(), b.getX(), c.getX(), d.getX() };
+    double all_y[] = { a.getY(), b.getY(), c.getY(), d.getY() };
+
+    for(int i = 0; i < 4; i++)
+    {
+        double ip1 = i+1 >= 4 ? all_x[0] : all_x[i+1];
+        double im1 = i-1 <= 0 ? all_x[3] : all_x[i-1];
+
+        output += (all_y[i] * (im1 - ip1));
+    }
+
+    output = (output > 0) ? output : -output;
+    output /= 2;
+    return output;
 }
+
+
 string Quadrilateral :: toString(){
     return "Quadrilateral(" + a.toString() +", " + b.toString()+ ", " + c.toString() + ", " + d.toString()  + ")";
 }
